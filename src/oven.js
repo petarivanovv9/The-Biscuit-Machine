@@ -8,9 +8,7 @@ const { ConveyorBelt } = require("./motor");
 
 
 class Oven {
-
     _NO_COOKING_TEMPERATURE = 0;
-
     _MIN_COOKING_TEMPERATURE = 220;
     _MAX_COOKING_TEMPERATURE = 240;
 
@@ -19,8 +17,10 @@ class Oven {
         this._temperature = 0;
 
         machineEvents.on("ovenOn", this.on.bind(this));
+        machineEvents.on("ovenOff", this.off.bind(this));
 
         machineEvents.on("pulse", this.performAction.bind(this));
+        machineEvents.on("pulseOven", this.performAction.bind(this));
     }
 
     performAction() {
@@ -46,9 +46,11 @@ class Oven {
 
         this._startHeater()
         .then(() => {
-            console.log("\n ... Oven is ready.");
+            if (this._temperature >= this._MIN_COOKING_TEMPERATURE && this._temperature <= this._MAX_COOKING_TEMPERATURE) {
+                console.log("\n ... Oven is ready.");
 
-            machineEvents.emit("ovenReady");
+                machineEvents.emit("ovenReady");
+            }
         });
     }
 
@@ -63,7 +65,7 @@ class Oven {
 
     async _startHeater() {
         // while (this.heating_element) {
-        while (this.heating_element && this._temperature <= this._MAX_COOKING_TEMPERATURE) {
+        while (this.heating_element && this._temperature < this._MAX_COOKING_TEMPERATURE) {
             // if (this._temperature === this._MAX_COOKING_TEMPERATURE) {
             //     this.off();
             // }

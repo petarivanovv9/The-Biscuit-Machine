@@ -2,14 +2,11 @@
 
 const { machineEvents } = require("./events");
 
-// const { createConveyor } = require("./conveyor");
-
 const { Oven } = require("./oven");
 const { Motor } = require("./motor");
 
 
 class BiscuitMachine {
-
     constructor() {
         this.switch = new Switch();
         this.oven = new Oven();
@@ -24,20 +21,17 @@ class BiscuitMachine {
         machineEvents.emit("switchPause");
     }
 
-    // switchOff() {
-    //     machineEvents.emit("switchOff");
-    // }
+    switchOff() {
+        machineEvents.emit("switchOff");
+    }
 }
 
 
 class Switch {
-
     constructor() {
         machineEvents.on("switchOn", this.on.bind(this));
-
         machineEvents.on("switchPause", this.pause.bind(this));
-
-        // machineEvents.on("switchOff", this.off.bind(this));
+        machineEvents.on("switchOff", this.off.bind(this));
     }
 
     on() {
