@@ -2,7 +2,7 @@
 
 const { machineEvents } = require("./events");
 
-const { sleep, rotate } = require("./utils");
+const { sleep, rotateToRight } = require("./utils");
 
 
 const ConveyorBelt = Array(6).fill(null);
@@ -81,7 +81,7 @@ class Motor {
             let last_biscuit = ConveyorBelt[5];
 
             // shift all biscuits 1 position to the right
-            rotate(ConveyorBelt, 1);
+            rotateToRight(ConveyorBelt, 1);
 
             ConveyorBelt[0] = null;
 
