@@ -103,6 +103,7 @@ class Motor {
 
 }
 
+
 class Extruder {
     constructor() {
         machineEvents.on("pulse", this.performAction.bind(this));
@@ -110,7 +111,7 @@ class Extruder {
 
     performAction() {
         console.log("--- Extruder >>> performAction");
-        ConveyorBelt[0] = "..B..1..";
+        ConveyorBelt[0] = "..B..e..";
     }
 }
 
@@ -125,11 +126,10 @@ class Stamper {
         console.log("--- Stamper >>> performAction");
 
         if (ConveyorBelt[1]) {
-            ConveyorBelt[1] += "2..";
+            ConveyorBelt[1] += "s..";
         }
     }
 }
-
 
 
 module.exports = {

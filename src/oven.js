@@ -4,6 +4,7 @@ const { machineEvents } = require("./events");
 
 const { sleep } = require("./utils");
 
+
 const { ConveyorBelt } = require("./motor");
 
 
@@ -28,7 +29,7 @@ class Oven {
     }
 
     performAction() {
-        console.log("\n Oven >> performAction ...");
+        console.log("--- Oven >>> performAction");
 
         if (ConveyorBelt[3]) {
             ConveyorBelt[3] += `bake..${this._temperature}..`;
@@ -40,7 +41,7 @@ class Oven {
     }
 
     async on() {
-        console.log("\n >> Oven has been turned ON.");
+        console.log("\n--- Oven has been turned ON.");
 
         this.heating_element = true;
         this._automaticHeater = true;
@@ -48,8 +49,6 @@ class Oven {
         this._startHeater()
         .then(() => {
             if (this._temperature >= this._MIN_COOKING_TEMPERATURE && this._temperature <= this._MAX_COOKING_TEMPERATURE) {
-                console.log("\n ... Oven is ready.");
-
                 machineEvents.emit("ovenReady");
 
                 machineEvents.emit("_ovenAutoHeater");
@@ -58,7 +57,7 @@ class Oven {
     }
 
     async off() {
-        console.log("\n >> Oven has been turned OFF.");
+        console.log("\n--- Oven has been turned OFF.");
 
         this.heating_element = false;
         this._automaticHeater = false;
@@ -116,6 +115,7 @@ class Oven {
         }
     }
 }
+
 
 module.exports = {
     Oven,
