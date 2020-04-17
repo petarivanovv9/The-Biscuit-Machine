@@ -2,7 +2,7 @@
 
 const machineEvents = require("./events").machineEvents;
 
-const utils = require("./utils");
+const { sleep } = require("./utils");
 
 const { ConveyorBelt } = require("./motor");
 
@@ -72,7 +72,7 @@ class Oven {
 
             this._temperature += 5;
 
-            await utils.sleep(500);
+            await sleep(500);
         }
     }
 
@@ -84,7 +84,7 @@ class Oven {
 
             this._temperature -= 5;
 
-            await utils.sleep(500);
+            await sleep(500);
         }
     }
 }
