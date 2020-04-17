@@ -13,15 +13,15 @@ class BiscuitMachine {
         this.motor = new Motor();
     }
 
-    switchOn() {
+    on() {
         machineEvents.emit("switchOn");
     }
 
-    switchPause() {
+    pause() {
         machineEvents.emit("switchPause");
     }
 
-    switchOff() {
+    off() {
         machineEvents.emit("switchOff");
     }
 }
