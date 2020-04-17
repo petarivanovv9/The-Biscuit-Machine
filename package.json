@@ -1,0 +1,19 @@
+{
+    "name": "the-biscuit-machine",
+    "version": "1.0.0",
+    "description": "The Bisctuit Machine",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/petarivanov9/The-Biscuit-Machine.git"
+    },
+    "author": "Petar Ivaylov Ivanov",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/petarivanov9/The-Biscuit-Machine/issues"
+    },
+    "homepage": "https://github.com/petarivanov9/The-Biscuit-Machine#readme"
+}
