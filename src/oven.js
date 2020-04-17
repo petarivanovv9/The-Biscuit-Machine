@@ -8,7 +8,7 @@ const { ConveyorBelt } = require("./motor");
 
 
 class Oven {
-    _NO_COOKING_TEMPERATURE = 0;
+    _ZERO_COOKING_TEMPERATURE = 0;
     _MIN_COOKING_TEMPERATURE = 220;
     _MAX_COOKING_TEMPERATURE = 240;
 
@@ -60,7 +60,6 @@ class Oven {
         this.heating_element = false;
 
         this._stopHeater();
-
     }
 
     async _startHeater() {
@@ -77,7 +76,7 @@ class Oven {
     }
 
     async _stopHeater() {
-        while (!this.heating_element && this._temperature > this._NO_COOKING_TEMPERATURE) {
+        while (!this.heating_element && this._temperature > this._ZERO_COOKING_TEMPERATURE) {
             // if (this._temperature === this._MIN_COOKING_TEMPERATURE) {
             //     this.on();
             // }
