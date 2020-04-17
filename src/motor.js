@@ -59,6 +59,11 @@ class Motor {
 
             machineEvents.emit("ovenOff");
         }
+
+        if (!this._working) {
+            this._working = true;
+            this._start();
+        }
     }
 
     async pulse() {
