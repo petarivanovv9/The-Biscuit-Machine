@@ -6,18 +6,18 @@ const { sleep, rotate } = require("./utils");
 
 
 const ConveyorBelt = Array(6).fill(null);
-const Result = new Array();
+const ReadyBiscuits = new Array();
 
 
 class Motor {
     constructor() {
-        this._working = false;
-        this._count_pulses = 0;
+        this._revolutions = 0;
+        this._is_working = false;
         this._should_stop_motor = false;
         this._should_send_pulse_stamper = false;
 
         machineEvents.on("ovenReady", this.on.bind(this));
-        machineEvents.on("motorPause", this.lightOff.bind(this));
+        machineEvents.on("motorPause", this.pause.bind(this));
         machineEvents.on("motorOff", this.off.bind(this));
 
         this.extruder = new Extruder();
@@ -25,40 +25,35 @@ class Motor {
     }
 
     on() {
-        console.log("\n >> Motor has been turned ON.");
+        console.log("\n--- Motor has been turned ON.");
 
-        this._working = true;
-
+        this._is_working = true;
         this._should_stop_motor = false;
-
         this._should_send_pulse_stamper = false;
 
         this._start();
     }
 
-    lightOff() {
-        console.log("\n >> Motor has been turned OFF [[ lightOff ]].");
+    pause() {
+        console.log("\n--- Motor has been turned OFF.");
 
-        this._working = false;
+        this._is_working = false;
     }
 
     off() {
-        console.log("\n >> Should stop Motor when Conveyor is empty [[ off ]].");
+        console.log("\n--- Motor has been turned OFF.");
 
-        this._should_stop_motor = true;
-
-        this._should_send_pulse_stamper = true;
-
-        if (this._count_pulses !== Result.length) {
-            console.log("... ConveyorBelt is not EMPTY ...");
-        } else {
-            console.log("... ConveyorBelt is EMPTY ...");
-
+        if (this._revolutions === ReadyBiscuits.length) {
+            this._is_working = false;
             machineEvents.emit("ovenOff");
+            return;
         }
 
-        if (!this._working) {
-            this._working = true;
+        this._should_stop_motor = true;
+        this._should_send_pulse_stamper = true;
+
+        if (!this._is_working) {
+            this._is_working = true;
             this._start();
         }
     }
@@ -70,11 +65,11 @@ class Motor {
     }
 
     async _start() {
-        while (this._working) {
-            if (!this._should_stop_motor && this._working) {
+        while (this._is_working) {
+            if (!this._should_stop_motor && this._is_working) {
                 await this.pulse();
 
-                this._count_pulses += 1;
+                this._revolutions += 1;
             } else {
                 if (this._should_send_pulse_stamper) {
                     machineEvents.emit("pulseStamper");
@@ -90,19 +85,18 @@ class Motor {
 
             ConveyorBelt[0] = null;
 
-            if (last_biscuit) Result.push(last_biscuit);
+            if (last_biscuit) ReadyBiscuits.push(last_biscuit);
 
             console.log("\n--- Revolution:");
-            console.log("--- Conveyor: ", ConveyorBelt);
-            console.log("--- Ready Biscuits: ", Result);
+            console.log("--- On Conveyor: ", ConveyorBelt);
+            console.log("--- Ready Biscuits: ", ReadyBiscuits);
 
             await sleep(5000);
 
-            if (this._should_stop_motor && this._count_pulses === Result.length) {
-                this._working = false;
-                this._should_stop_motor = false;
-
+            if (this._should_stop_motor && this._revolutions === ReadyBiscuits.length) {
+                this._is_working = false;
                 machineEvents.emit("ovenOff");
+                return;
             }
         }
     }
@@ -115,7 +109,7 @@ class Extruder {
     }
 
     performAction() {
-        console.log("\n--- Extruder >>> performAction");
+        console.log("--- Extruder >>> performAction");
         ConveyorBelt[0] = "..B..1..";
     }
 }
@@ -128,7 +122,7 @@ class Stamper {
     }
 
     performAction() {
-        console.log("\n--- Stamper >>> performAction");
+        console.log("--- Stamper >>> performAction");
 
         if (ConveyorBelt[1]) {
             ConveyorBelt[1] += "2..";
