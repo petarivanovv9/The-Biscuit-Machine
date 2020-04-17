@@ -12,12 +12,9 @@ const Result = new Array();
 class Motor {
     constructor() {
         this._working = false;
-
-        this._should_stop_motor = false;
-
-        this._should_send_pulse_stamper = false;
-
         this._count_pulses = 0;
+        this._should_stop_motor = false;
+        this._should_send_pulse_stamper = false;
 
         machineEvents.on("ovenReady", this.on.bind(this));
         machineEvents.on("motorPause", this.lightOff.bind(this));
@@ -76,49 +73,37 @@ class Motor {
         while (this._working) {
             if (!this._should_stop_motor && this._working) {
                 await this.pulse();
+
                 this._count_pulses += 1;
             } else {
                 if (this._should_send_pulse_stamper) {
                     machineEvents.emit("pulseStamper");
                     this._should_send_pulse_stamper = false;
                 }
-
                 machineEvents.emit("pulseOven");
-
-                await sleep(5000);
             }
 
-            console.log("...before shift ... ConveyorBelt ... ", ConveyorBelt);
-
-            if (ConveyorBelt[5]) {
-                Result.push(ConveyorBelt[5]);
-
-                console.log("... Result ... ", Result);
-
-                rotate(ConveyorBelt, 1);
-
-                ConveyorBelt[0] = null;
-
-                console.log("...after shift ... ConveyorBelt ... ", ConveyorBelt);
-
-                continue;
-            }
+            let last_biscuit = ConveyorBelt[5];
 
             // shift all biscuits 1 position to the right
             rotate(ConveyorBelt, 1);
 
-            console.log("...after shift ConveyorBelt ... ", ConveyorBelt);
+            ConveyorBelt[0] = null;
 
+            if (last_biscuit) Result.push(last_biscuit);
+
+            console.log("\n--- Revolution:");
+            console.log("--- Conveyor: ", ConveyorBelt);
+            console.log("--- Ready Biscuits: ", Result);
+
+            await sleep(5000);
 
             if (this._should_stop_motor && this._count_pulses === Result.length) {
-                console.log("...OOOO .... ConveyorBelt is EMPTY ...");
-
                 this._working = false;
                 this._should_stop_motor = false;
 
                 machineEvents.emit("ovenOff");
             }
-
         }
     }
 
@@ -130,8 +115,7 @@ class Extruder {
     }
 
     performAction() {
-        console.log("\n Extruder >> performAction ...");
-
+        console.log("\n--- Extruder >>> performAction");
         ConveyorBelt[0] = "..B..1..";
     }
 }
@@ -140,12 +124,11 @@ class Extruder {
 class Stamper {
     constructor() {
         machineEvents.on("pulse", this.performAction.bind(this));
-
         machineEvents.on("pulseStamper", this.performAction.bind(this));
     }
 
     performAction() {
-        console.log("\n Stamper >> performAction ...");
+        console.log("\n--- Stamper >>> performAction");
 
         if (ConveyorBelt[1]) {
             ConveyorBelt[1] += "2..";
