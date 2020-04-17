@@ -1,6 +1,6 @@
 "use strict";
 
-const machineEvents = require("./events").machineEvents;
+const { machineEvents } = require("./events");
 
 const { sleep } = require("./utils");
 
