@@ -1,11 +1,11 @@
-'use strict'
+"use strict"
 
-const { machineEvents } = require('./events');
+const { machineEvents } = require("./events");
 
-// const { createConveyor } = require('./conveyor');
+// const { createConveyor } = require("./conveyor");
 
-const { Oven } = require('./oven');
-const { Motor } = require('./motor');
+const { Oven } = require("./oven");
+const { Motor } = require("./motor");
 
 
 class BiscuitMachine {
@@ -17,15 +17,15 @@ class BiscuitMachine {
     }
 
     switchOn() {
-        machineEvents.emit('switchOn');
+        machineEvents.emit("switchOn");
     }
 
     switchPause() {
-        machineEvents.emit('switchPause');
+        machineEvents.emit("switchPause");
     }
 
     // switchOff() {
-    //     machineEvents.emit('switchOff');
+    //     machineEvents.emit("switchOff");
     // }
 }
 
@@ -33,29 +33,29 @@ class BiscuitMachine {
 class Switch {
 
     constructor() {
-        machineEvents.on('switchOn', this.on.bind(this));
+        machineEvents.on("switchOn", this.on.bind(this));
 
-        machineEvents.on('switchPause', this.pause.bind(this));
+        machineEvents.on("switchPause", this.pause.bind(this));
 
-        // machineEvents.on('switchOff', this.off.bind(this));
+        // machineEvents.on("switchOff", this.off.bind(this));
     }
 
     on() {
-        console.log('\n >> Machine has been turned ON.');
+        console.log("\n >> Machine has been turned ON.");
 
-        machineEvents.emit('ovenOn');
+        machineEvents.emit("ovenOn");
     }
 
     pause() {
-        console.log('\n >> Machine has been PAUSED.');
+        console.log("\n >> Machine has been PAUSED.");
 
-        machineEvents.emit('motorPause');
+        machineEvents.emit("motorPause");
     }
 
     off() {
-        console.log('\n >> Machine has been turned OFF.');
+        console.log("\n >> Machine has been turned OFF.");
 
-        machineEvents.emit('motorOff');
+        machineEvents.emit("motorOff");
     }
 }
 

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const sleep = (ms) => {
     return new Promise((resolve) => {

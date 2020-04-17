@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-const machineEvents = require('./events').machineEvents;
+const machineEvents = require("./events").machineEvents;
 
-const utils = require('./utils');
+const utils = require("./utils");
 
-const { ConveyorBelt } = require('./motor');
+const { ConveyorBelt } = require("./motor");
 
 
 class Oven {
@@ -18,42 +18,42 @@ class Oven {
         this.heating_element = false;
         this._temperature = 0;
 
-        machineEvents.on('ovenOn', this.on.bind(this));
+        machineEvents.on("ovenOn", this.on.bind(this));
 
-        machineEvents.on('pulse', this.performAction.bind(this));
+        machineEvents.on("pulse", this.performAction.bind(this));
     }
 
     performAction() {
-        console.log('\n Oven >> performAction ...');
+        console.log("\n Oven >> performAction ...");
 
         if (ConveyorBelt[3]) {
-            ConveyorBelt[3] += 'bake..3..';
+            ConveyorBelt[3] += "bake..3..";
         }
 
         if (ConveyorBelt[4]) {
-            ConveyorBelt[4] += 'bake..4..';
+            ConveyorBelt[4] += "bake..4..";
         }
     }
 
     temperature() {
-        console.log('\n Current temperature: ', this._temperature);
+        console.log("\n Current temperature: ", this._temperature);
     }
 
     async on() {
-        console.log('\n >> Oven has been turned ON.');
+        console.log("\n >> Oven has been turned ON.");
 
         this.heating_element = true;
 
         this._startHeater()
         .then(() => {
-            console.log('\n ... Oven is ready.');
+            console.log("\n ... Oven is ready.");
 
-            machineEvents.emit('ovenReady');
+            machineEvents.emit("ovenReady");
         });
     }
 
     async off() {
-        console.log('\n >> Oven has been turned OFF.');
+        console.log("\n >> Oven has been turned OFF.");
 
         this.heating_element = false;
 
