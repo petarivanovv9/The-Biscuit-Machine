@@ -31,4 +31,4 @@ class BiscuitMachine {
 }
 
 
-const machine = new BiscuitMachine();
+const BM = new BiscuitMachine();
