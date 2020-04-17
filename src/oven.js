@@ -2,7 +2,7 @@
 
 const { machineEvents } = require("./events");
 
-const { sleep } = require("./utils");
+const { delay } = require("./utils");
 
 
 const { ConveyorBelt } = require("./motor");
@@ -69,7 +69,7 @@ class Oven {
         while (this.heating_element && this._temperature < this._MAX_COOKING_TEMPERATURE) {
             this._temperature += 5;
 
-            await sleep(1500);
+            await delay(1500);
 
             if (this._temperature === this._MAX_COOKING_TEMPERATURE) {
                 this.heating_element = false;
@@ -97,7 +97,7 @@ class Oven {
                 this._temperature -= 5;
             }
 
-            await sleep(1500);
+            await delay(1500);
         }
     }
 

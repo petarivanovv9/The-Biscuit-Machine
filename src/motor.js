@@ -2,7 +2,7 @@
 
 const { machineEvents } = require("./events");
 
-const { sleep, rotateToRight } = require("./utils");
+const { delay, rotateToRight } = require("./utils");
 
 
 const ConveyorBelt = Array(6).fill(null);
@@ -61,7 +61,7 @@ class Motor {
     async pulse() {
         machineEvents.emit("pulse");
 
-        await sleep(5000);
+        await delay(5000);
     }
 
     async _start() {
@@ -91,7 +91,7 @@ class Motor {
             console.log("--- On Conveyor: ", ConveyorBelt);
             console.log("--- Ready Biscuits: ", ReadyBiscuits);
 
-            await sleep(5000);
+            await delay(5000);
 
             if (this._should_stop_motor && this._revolutions === ReadyBiscuits.length) {
                 this._is_working = false;

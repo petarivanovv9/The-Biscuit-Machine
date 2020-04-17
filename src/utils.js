@@ -1,6 +1,6 @@
 "use strict";
 
-const sleep = (ms) => {
+const delay = (ms) => {
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
     });
@@ -13,6 +13,6 @@ const rotateToRight = (arr) => {
 
 
 module.exports = {
-    sleep,
+    delay,
     rotateToRight,
 };
