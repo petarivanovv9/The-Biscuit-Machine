@@ -48,8 +48,7 @@ class Motor {
         console.log("\n--- Motor has been turned OFF.");
 
         if (this._revolutions === ReadyBiscuits.length) {
-            this._is_working = false;
-            machineEvents.emit("ovenOff");
+            this._stopMotorAndOven();
             return;
         }
 
@@ -98,13 +97,15 @@ class Motor {
             await delay(5000);
 
             if (this._should_stop_motor && this._revolutions === ReadyBiscuits.length) {
-                this._is_working = false;
-                machineEvents.emit("ovenOff");
-                return;
+                this._stopMotorAndOven();
             }
         }
     }
 
+    _stopMotorAndOven() {
+        this._is_working = false;
+        machineEvents.emit("ovenOff");
+    }
 }
 
 
