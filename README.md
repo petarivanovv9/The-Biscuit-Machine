@@ -34,9 +34,10 @@ For instance, you should be seeing something like:
 ![Running BM 01](running-bm-01.png)
 
 Operations:
-- to start the machine type: `bm.on()`;
-- to pause the machine type: `bm.pause()`;
-- to stop the machine type: `bm.off()`.
+- to start the machine, type: `bm.on()`;
+- to pause the machine, type: `bm.pause()`;
+- to stop the machine, type: `bm.off()`;
+- to exit the machine panel, type `.exit` or press `ctrl + C`.
 
 You should be also seeing some `console.log`(s) which are from the machine in order to have some "feedback" from the machine.
 
