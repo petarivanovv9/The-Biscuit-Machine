@@ -1,3 +1,6 @@
+/*
+    Module which contains the machine events emitter.
+*/
 "use strict";
 
 const EventEmitter = require("events").EventEmitter;

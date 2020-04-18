@@ -1,3 +1,7 @@
+/*
+    Module which contains the Motor, Extruder and Stamper
+    Device implementations.
+*/
 "use strict";
 
 const { machineEvents } = require("./events");

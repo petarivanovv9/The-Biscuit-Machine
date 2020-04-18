@@ -1,3 +1,6 @@
+/*
+    Module which contains the Oven Device implementation.
+*/
 "use strict";
 
 const { machineEvents } = require("./events");
