@@ -84,7 +84,7 @@ class Motor {
             let last_biscuit = ConveyorBelt[5];
 
             // shift all biscuits 1 position to the right
-            rotateToRight(ConveyorBelt, 1);
+            rotateToRight(ConveyorBelt);
 
             ConveyorBelt[0] = null;
 
