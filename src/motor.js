@@ -8,6 +8,13 @@ const { machineEvents } = require("./events");
 
 const { delay, rotateToRight } = require("./utils");
 
+const {
+    OVEN_READY_EVENT,
+
+    MOTOR_PAUSE_EVENT,
+    MOTOR_OFF_EVENT,
+} = require("./constants");
+
 
 const ConveyorBelt = Array(6).fill(null);
 const ReadyBiscuits = new Array();
@@ -20,9 +27,9 @@ class Motor {
         this._should_stop_motor = false;
         this._should_send_pulse_stamper = false;
 
-        machineEvents.on("ovenReady", this.on.bind(this));
-        machineEvents.on("motorPause", this.pause.bind(this));
-        machineEvents.on("motorOff", this.off.bind(this));
+        machineEvents.on(OVEN_READY_EVENT, this.on.bind(this));
+        machineEvents.on(MOTOR_PAUSE_EVENT, this.pause.bind(this));
+        machineEvents.on(MOTOR_OFF_EVENT, this.off.bind(this));
 
         this.extruder = new Extruder();
         this.stamper = new Stamper();

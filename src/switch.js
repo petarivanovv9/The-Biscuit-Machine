@@ -9,6 +9,9 @@ const {
     SWITCH_ON_EVENT,
     SWITCH_PAUSE_EVENT,
     SWITCH_OFF_EVENT,
+
+    MOTOR_PAUSE_EVENT,
+    MOTOR_OFF_EVENT,
 } = require("./constants");
 
 
@@ -24,11 +27,11 @@ class Switch {
     }
 
     pause() {
-        machineEvents.emit("motorPause");
+        machineEvents.emit(MOTOR_PAUSE_EVENT);
     }
 
     off() {
-        machineEvents.emit("motorOff");
+        machineEvents.emit(MOTOR_OFF_EVENT);
     }
 }
 

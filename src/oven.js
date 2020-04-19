@@ -7,6 +7,10 @@ const { machineEvents } = require("./events");
 
 const { delay } = require("./utils");
 
+const {
+    OVEN_READY_EVENT,
+} = require("./constants");
+
 
 const { ConveyorBelt } = require("./motor");
 
@@ -52,7 +56,7 @@ class Oven {
         this._startHeater()
         .then(() => {
             if (this._temperature >= this._MIN_COOKING_TEMPERATURE && this._temperature <= this._MAX_COOKING_TEMPERATURE) {
-                machineEvents.emit("ovenReady");
+                machineEvents.emit(OVEN_READY_EVENT);
 
                 machineEvents.emit("_ovenAutoHeater");
             }
