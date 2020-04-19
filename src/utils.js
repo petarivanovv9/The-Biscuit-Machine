@@ -16,6 +16,7 @@ const delay = (ms) => {
 */
 const rotateToRight = (arr) => {
     arr.unshift(...arr.splice(-1));
+    arr[0] = null;
 };
 
 

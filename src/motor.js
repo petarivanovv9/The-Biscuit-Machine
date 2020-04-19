@@ -26,6 +26,8 @@ const ReadyBiscuits = new Array();
 
 
 class Motor {
+    _READY_BISCUIT_POSITION_ON_CONVEYOR = 5;
+
     constructor() {
         this._revolutions = 0;
         this._is_working = false;
@@ -93,12 +95,10 @@ class Motor {
                 machineEvents.emit(PULSE_OVEN_EVENT);
             }
 
-            let last_biscuit = ConveyorBelt[5];
+            let last_biscuit = ConveyorBelt[this._READY_BISCUIT_POSITION_ON_CONVEYOR];
 
             // shift all biscuits 1 position to the right
             rotateToRight(ConveyorBelt);
-
-            ConveyorBelt[0] = null;
 
             if (last_biscuit) ReadyBiscuits.push(last_biscuit);
 
@@ -122,18 +122,22 @@ class Motor {
 
 
 class Extruder {
+    _EXTRUDER_POSITION_ON_CONVEYOR = 0;
+
     constructor() {
         machineEvents.on(PULSE_EVENT, this.performAction.bind(this));
     }
 
     performAction() {
         console.log("--- Extruder >>> performAction");
-        ConveyorBelt[0] = "..B..e..";
+        ConveyorBelt[this._EXTRUDER_POSITION_ON_CONVEYOR] = "..B..e..";
     }
 }
 
 
 class Stamper {
+    _STAMPER_POSITION_ON_CONVEYOR = 0;
+
     constructor() {
         machineEvents.on(PULSE_EVENT, this.performAction.bind(this));
         machineEvents.on(PULSE_STAMPER_EVENT, this.performAction.bind(this));
@@ -142,8 +146,8 @@ class Stamper {
     performAction() {
         console.log("--- Stamper >>> performAction");
 
-        if (ConveyorBelt[1]) {
-            ConveyorBelt[1] += "s..";
+        if (ConveyorBelt[this._STAMPER_POSITION_ON_CONVEYOR]) {
+            ConveyorBelt[this._STAMPER_POSITION_ON_CONVEYOR] += "s..";
         }
     }
 }
