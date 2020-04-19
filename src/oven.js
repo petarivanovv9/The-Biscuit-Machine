@@ -25,6 +25,11 @@ class Oven {
     _MIN_COOKING_TEMPERATURE = 220;
     _MAX_COOKING_TEMPERATURE = 240;
 
+    _FIRST_OVEN_POSITION_ON_CONVEYOR = 3;
+    _SECOND_OVEN_POSITION_ON_CONVEYOR = 4;
+
+    _TEMPERATURE_INCREASE = 5;
+
     constructor() {
         this._temperature = 0;
         this._automaticHeater = false;
@@ -43,12 +48,12 @@ class Oven {
     performAction() {
         console.log("--- Oven >>> performAction");
 
-        if (ConveyorBelt[3]) {
-            ConveyorBelt[3] += `bake..${this._temperature}..`;
+        if (ConveyorBelt[this._FIRST_OVEN_POSITION_ON_CONVEYOR]) {
+            ConveyorBelt[this._FIRST_OVEN_POSITION_ON_CONVEYOR] += `bake..${this._temperature}..`;
         }
 
-        if (ConveyorBelt[4]) {
-            ConveyorBelt[4] += `bake..${this._temperature}..`;
+        if (ConveyorBelt[this._SECOND_OVEN_POSITION_ON_CONVEYOR]) {
+            ConveyorBelt[this._SECOND_OVEN_POSITION_ON_CONVEYOR] += `bake..${this._temperature}..`;
         }
     }
 
@@ -79,7 +84,7 @@ class Oven {
 
     async _startHeater() {
         while (this.heating_element && this._temperature < this._MAX_COOKING_TEMPERATURE) {
-            this._temperature += 5;
+            this._temperature += this._TEMPERATURE_INCREASE;
 
             await delay(1500);
 
@@ -102,11 +107,11 @@ class Oven {
             }
 
             if (!this._automaticHeater && this._temperature > this._ZERO_COOKING_TEMPERATURE) {
-                this._temperature -= 5;
+                this._temperature -= this._TEMPERATURE_INCREASE;
             }
 
             if (this._automaticHeater && this._temperature > this._MIN_COOKING_TEMPERATURE) {
-                this._temperature -= 5;
+                this._temperature -= this._TEMPERATURE_INCREASE;
             }
 
             await delay(1500);
