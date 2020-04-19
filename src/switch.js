@@ -5,12 +5,18 @@
 
 const { machineEvents } = require("./events");
 
+const {
+    SWITCH_ON_EVENT,
+    SWITCH_PAUSE_EVENT,
+    SWITCH_OFF_EVENT,
+} = require("./constants");
+
 
 class Switch {
     constructor() {
-        machineEvents.on("switchOn", this.on.bind(this));
-        machineEvents.on("switchPause", this.pause.bind(this));
-        machineEvents.on("switchOff", this.off.bind(this));
+        machineEvents.on(SWITCH_ON_EVENT, this.on.bind(this));
+        machineEvents.on(SWITCH_PAUSE_EVENT, this.pause.bind(this));
+        machineEvents.on(SWITCH_OFF_EVENT, this.off.bind(this));
     }
 
     on() {

@@ -4,6 +4,12 @@ const repl = require('repl');
 
 const { machineEvents } = require("./events");
 
+const {
+    SWITCH_ON_EVENT,
+    SWITCH_PAUSE_EVENT,
+    SWITCH_OFF_EVENT,
+} = require("./constants");
+
 const { Switch } = require("./switch");
 const { Oven } = require("./oven");
 const { Motor } = require("./motor");
@@ -18,17 +24,17 @@ class BiscuitMachine {
 
     on() {
         console.log("\n--- Machine has been turned ON.");
-        machineEvents.emit("switchOn");
+        machineEvents.emit(SWITCH_ON_EVENT);
     }
 
     pause() {
         console.log("\n--- Machine has been PAUSED.");
-        machineEvents.emit("switchPause");
+        machineEvents.emit(SWITCH_PAUSE_EVENT);
     }
 
     off() {
         console.log("\n--- Machine has been turned OFF.");
-        machineEvents.emit("switchOff");
+        machineEvents.emit(SWITCH_OFF_EVENT);
     }
 }
 
