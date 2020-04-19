@@ -1,5 +1,7 @@
 # The Biscuit Machine :cookie:
 
+![Requirements](images/requirements.png)
+
 ## Getting started
 
 ### Docker
@@ -31,7 +33,7 @@ After the project is succesfully set up and started, you should be seeing:
 in your Terminal.
 
 For instance, you should be seeing something like:
-![Running BM 01](running-bm-01.png)
+![Running BM 01](images/running-bm-01.png)
 
 Operations:
 - to start the machine, type: `bm.on()`;
