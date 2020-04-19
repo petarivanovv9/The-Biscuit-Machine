@@ -9,6 +9,10 @@ const { delay } = require("./utils");
 
 const {
     OVEN_READY_EVENT,
+    OVEN_ON_EVENT,
+    OVEN_OFF_EVENT,
+
+    PULSE_EVENT,
 } = require("./constants");
 
 
@@ -26,10 +30,10 @@ class Oven {
 
         this.heating_element = false;
 
-        machineEvents.on("ovenOn", this.on.bind(this));
-        machineEvents.on("ovenOff", this.off.bind(this));
+        machineEvents.on(OVEN_ON_EVENT, this.on.bind(this));
+        machineEvents.on(OVEN_OFF_EVENT, this.off.bind(this));
 
-        machineEvents.on("pulse", this.performAction.bind(this));
+        machineEvents.on(PULSE_EVENT, this.performAction.bind(this));
         machineEvents.on("pulseOven", this.performAction.bind(this));
 
         machineEvents.on("_ovenAutoHeater", this._autoHeater.bind(this));

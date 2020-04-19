@@ -8,9 +8,13 @@ const SWITCH_PAUSE_EVENT = 'switchPause';
 const SWITCH_OFF_EVENT = 'switchOff';
 
 const OVEN_READY_EVENT = 'ovenReady';
+const OVEN_ON_EVENT = 'ovenOn';
+const OVEN_OFF_EVENT = 'ovenOff';
 
 const MOTOR_PAUSE_EVENT = 'motorPause';
 const MOTOR_OFF_EVENT = 'motorOff';
+
+const PULSE_EVENT = 'pulse';
 
 
 module.exports = {
@@ -19,7 +23,11 @@ module.exports = {
     SWITCH_OFF_EVENT,
 
     OVEN_READY_EVENT,
+    OVEN_ON_EVENT,
+    OVEN_OFF_EVENT,
 
     MOTOR_PAUSE_EVENT,
     MOTOR_OFF_EVENT,
+
+    PULSE_EVENT,
 };

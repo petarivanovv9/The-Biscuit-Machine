@@ -10,9 +10,12 @@ const { delay, rotateToRight } = require("./utils");
 
 const {
     OVEN_READY_EVENT,
+    OVEN_OFF_EVENT,
 
     MOTOR_PAUSE_EVENT,
     MOTOR_OFF_EVENT,
+
+    PULSE_EVENT,
 } = require("./constants");
 
 
@@ -69,7 +72,7 @@ class Motor {
     }
 
     async pulse() {
-        machineEvents.emit("pulse");
+        machineEvents.emit(PULSE_EVENT);
 
         await delay(5000);
     }
@@ -111,14 +114,14 @@ class Motor {
 
     _stopMotorAndOven() {
         this._is_working = false;
-        machineEvents.emit("ovenOff");
+        machineEvents.emit(OVEN_OFF_EVENT);
     }
 }
 
 
 class Extruder {
     constructor() {
-        machineEvents.on("pulse", this.performAction.bind(this));
+        machineEvents.on(PULSE_EVENT, this.performAction.bind(this));
     }
 
     performAction() {
@@ -130,7 +133,7 @@ class Extruder {
 
 class Stamper {
     constructor() {
-        machineEvents.on("pulse", this.performAction.bind(this));
+        machineEvents.on(PULSE_EVENT, this.performAction.bind(this));
         machineEvents.on("pulseStamper", this.performAction.bind(this));
     }
 
