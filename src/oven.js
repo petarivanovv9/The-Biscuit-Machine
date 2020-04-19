@@ -13,6 +13,7 @@ const {
     OVEN_OFF_EVENT,
 
     PULSE_EVENT,
+    PULSE_OVEN_EVENT,
 } = require("./constants");
 
 
@@ -34,7 +35,7 @@ class Oven {
         machineEvents.on(OVEN_OFF_EVENT, this.off.bind(this));
 
         machineEvents.on(PULSE_EVENT, this.performAction.bind(this));
-        machineEvents.on("pulseOven", this.performAction.bind(this));
+        machineEvents.on(PULSE_OVEN_EVENT, this.performAction.bind(this));
 
         machineEvents.on("_ovenAutoHeater", this._autoHeater.bind(this));
     }

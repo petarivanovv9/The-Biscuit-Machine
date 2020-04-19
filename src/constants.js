@@ -15,6 +15,8 @@ const MOTOR_PAUSE_EVENT = 'motorPause';
 const MOTOR_OFF_EVENT = 'motorOff';
 
 const PULSE_EVENT = 'pulse';
+const PULSE_OVEN_EVENT = 'pulseOven';
+const PULSE_STAMPER_EVENT = 'pulseStamper';
 
 
 module.exports = {
@@ -30,4 +32,6 @@ module.exports = {
     MOTOR_OFF_EVENT,
 
     PULSE_EVENT,
+    PULSE_OVEN_EVENT,
+    PULSE_STAMPER_EVENT,
 };

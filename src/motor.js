@@ -16,6 +16,8 @@ const {
     MOTOR_OFF_EVENT,
 
     PULSE_EVENT,
+    PULSE_OVEN_EVENT,
+    PULSE_STAMPER_EVENT,
 } = require("./constants");
 
 
@@ -85,10 +87,10 @@ class Motor {
                 this._revolutions += 1;
             } else {
                 if (this._should_send_pulse_stamper) {
-                    machineEvents.emit("pulseStamper");
+                    machineEvents.emit(PULSE_STAMPER_EVENT);
                     this._should_send_pulse_stamper = false;
                 }
-                machineEvents.emit("pulseOven");
+                machineEvents.emit(PULSE_OVEN_EVENT);
             }
 
             let last_biscuit = ConveyorBelt[5];
@@ -134,7 +136,7 @@ class Extruder {
 class Stamper {
     constructor() {
         machineEvents.on(PULSE_EVENT, this.performAction.bind(this));
-        machineEvents.on("pulseStamper", this.performAction.bind(this));
+        machineEvents.on(PULSE_STAMPER_EVENT, this.performAction.bind(this));
     }
 
     performAction() {
