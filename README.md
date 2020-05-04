@@ -12,7 +12,7 @@ Finaly, build the Docker image by typing: `docker build -t biscuit-machine .` in
 
 #### Terminal
 
-To start the project inside a terminal of your choice run `docker run -it biscuit-machine`.
+To start the project inside a terminal of your choice run `docker run -it --rm biscuit-machine`.
 
 
 ### Without using Docker
