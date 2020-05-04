@@ -1,5 +1,7 @@
 # The Biscuit Machine :cookie:
 
+![Requirements](images/requirements.png)
+
 ## Getting started
 
 ### Docker
