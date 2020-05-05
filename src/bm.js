@@ -1,7 +1,5 @@
 "use strict";
 
-const repl = require('repl');
-
 const { machineEvents } = require("./events");
 
 const {
@@ -39,7 +37,6 @@ class BiscuitMachine {
 }
 
 
-const bm = new BiscuitMachine();
-
-
-repl.start('> ').context.bm = bm;
+module.exports = {
+    BiscuitMachine,
+};
