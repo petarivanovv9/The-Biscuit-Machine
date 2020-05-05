@@ -4,7 +4,7 @@
     "description": "The Bisctuit Machine",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "jest"
     },
     "repository": {
         "type": "git",
@@ -15,5 +15,9 @@
     "bugs": {
         "url": "https://github.com/petarivanov9/The-Biscuit-Machine/issues"
     },
-    "homepage": "https://github.com/petarivanov9/The-Biscuit-Machine#readme"
+    "homepage": "https://github.com/petarivanov9/The-Biscuit-Machine#readme",
+    "dependencies": {
+        "jest": "^26.0.1",
+        "sinon": "^9.0.2"
+    }
 }
