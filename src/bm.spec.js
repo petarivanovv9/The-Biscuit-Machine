@@ -1,3 +1,5 @@
+"use strict";
+
 const { machineEvents } = require("./events");
 
 const { BiscuitMachine } = require("./bm");
@@ -11,7 +13,7 @@ const {
 
 describe('BiscuitMachine', () => {
     describe('on', () => {
-        it('should emit SWITCH_ON_EVENT', () => {
+        test('should emit SWITCH_ON_EVENT', () => {
             machineEvents.emit = jest.fn();
 
             const bm = new BiscuitMachine();
@@ -23,7 +25,7 @@ describe('BiscuitMachine', () => {
     });
 
     describe('pause', () => {
-        it('should emit SWITCH_PAUSE_EVENT', () => {
+        test('should emit SWITCH_PAUSE_EVENT', () => {
             machineEvents.emit = jest.fn();
 
             const bm = new BiscuitMachine();
@@ -35,7 +37,7 @@ describe('BiscuitMachine', () => {
     });
 
     describe('off', () => {
-        it('should emit SWITCH_OFF_EVENT', () => {
+        test('should emit SWITCH_OFF_EVENT', () => {
             machineEvents.emit = jest.fn();
 
             const bm = new BiscuitMachine();
