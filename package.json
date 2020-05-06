@@ -18,7 +18,6 @@
     },
     "homepage": "https://github.com/petarivanov9/The-Biscuit-Machine#readme",
     "dependencies": {
-        "jest": "^26.0.1",
-        "sinon": "^9.0.2"
+        "jest": "^26.0.1"
     }
 }
