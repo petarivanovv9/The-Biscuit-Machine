@@ -71,7 +71,7 @@ class Oven {
 
         this._startHeater()
         .then(() => {
-            if (this._temperature >= this._MIN_COOKING_TEMPERATURE && this._temperature <= this._MAX_COOKING_TEMPERATURE) {
+            if (this._isTemperatureWithinWorkingLimits()) {
                 if (!this._is_motor_paused) {
                     machineEvents.emit(OVEN_READY_EVENT);
                 }
@@ -144,6 +144,10 @@ class Oven {
                 await this._startHeater();
             }
         }
+    }
+
+    _isTemperatureWithinWorkingLimits() {
+        return this._temperature >= this._MIN_COOKING_TEMPERATURE && this._temperature <= this._MAX_COOKING_TEMPERATURE;
     }
 }
 
