@@ -13,7 +13,7 @@ const {
 
 describe('BiscuitMachine', () => {
     describe('on', () => {
-        test('should emit SWITCH_ON_EVENT', () => {
+        it('should emit SWITCH_ON_EVENT', () => {
             machineEvents.emit = jest.fn();
 
             const bm = new BiscuitMachine();
@@ -25,7 +25,7 @@ describe('BiscuitMachine', () => {
     });
 
     describe('pause', () => {
-        test('should emit SWITCH_PAUSE_EVENT', () => {
+        it('should emit SWITCH_PAUSE_EVENT', () => {
             machineEvents.emit = jest.fn();
 
             const bm = new BiscuitMachine();
@@ -37,7 +37,7 @@ describe('BiscuitMachine', () => {
     });
 
     describe('off', () => {
-        test('should emit SWITCH_OFF_EVENT', () => {
+        it('should emit SWITCH_OFF_EVENT', () => {
             machineEvents.emit = jest.fn();
 
             const bm = new BiscuitMachine();

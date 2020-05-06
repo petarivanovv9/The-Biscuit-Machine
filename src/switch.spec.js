@@ -13,7 +13,7 @@ const {
 
 describe('SwitchDevice', () => {
     describe('on', () => {
-        test('should emit OVEN_ON_EVENT', () => {
+        it('should emit OVEN_ON_EVENT', () => {
             machineEvents.emit = jest.fn();
 
             const switchDevice = new Switch();
@@ -24,7 +24,7 @@ describe('SwitchDevice', () => {
     });
 
     describe('pause', () => {
-        test('should emit MOTOR_PAUSE_EVENT', () => {
+        it('should emit MOTOR_PAUSE_EVENT', () => {
             machineEvents.emit = jest.fn();
 
             const switchDevice = new Switch();
@@ -35,7 +35,7 @@ describe('SwitchDevice', () => {
     });
 
     describe('off', () => {
-        test('should emit MOTOR_OFF_EVENT', () => {
+        it('should emit MOTOR_OFF_EVENT', () => {
             machineEvents.emit = jest.fn();
 
             const switchDevice = new Switch();
