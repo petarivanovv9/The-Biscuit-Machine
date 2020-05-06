@@ -1,6 +1,8 @@
-const { Motor } = require('./motor');
+"use strict";
 
-const { machineEvents } = require('./events');
+const { Motor } = require("./motor");
+
+const { machineEvents } = require("./events");
 
 const {
     PULSE_EVENT,

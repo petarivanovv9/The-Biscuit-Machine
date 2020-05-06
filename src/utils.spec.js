@@ -1,6 +1,6 @@
 "use strict";
 
-const { rotateToRight } = require('./utils');
+const { rotateToRight } = require("./utils");
 
 
 describe('rotateToRight', () => {
