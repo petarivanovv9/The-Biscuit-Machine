@@ -12,6 +12,8 @@ const {
     OVEN_ON_EVENT,
     OVEN_OFF_EVENT,
 
+    MOTOR_PAUSE_EVENT,
+
     PULSE_EVENT,
     PULSE_OVEN_EVENT,
 } = require("./constants");
@@ -33,11 +35,14 @@ class Oven {
     constructor() {
         this._temperature = 0;
         this._automaticHeater = false;
+        this._is_motor_paused = false;
 
         this.heating_element = false;
 
         machineEvents.on(OVEN_ON_EVENT, this.on.bind(this));
         machineEvents.on(OVEN_OFF_EVENT, this.off.bind(this));
+
+        machineEvents.on(MOTOR_PAUSE_EVENT, this.pause.bind(this));
 
         machineEvents.on(PULSE_EVENT, this.performAction.bind(this));
         machineEvents.on(PULSE_OVEN_EVENT, this.performAction.bind(this));
@@ -62,15 +67,22 @@ class Oven {
 
         this.heating_element = true;
         this._automaticHeater = true;
+        this._is_motor_paused = false;
 
         this._startHeater()
         .then(() => {
-            if (this._temperature >= this._MIN_COOKING_TEMPERATURE && this._temperature <= this._MAX_COOKING_TEMPERATURE) {
-                machineEvents.emit(OVEN_READY_EVENT);
+            if (this._isTemperatureWithinWorkingLimits()) {
+                if (!this._is_motor_paused) {
+                    machineEvents.emit(OVEN_READY_EVENT);
+                }
 
                 machineEvents.emit("_ovenAutoHeater");
             }
         });
+    }
+
+    pause() {
+        this._is_motor_paused = true;
     }
 
     async off() {
@@ -78,6 +90,8 @@ class Oven {
 
         this.heating_element = false;
         this._automaticHeater = false;
+
+        this._is_motor_paused = false;
 
         this._stopHeater();
     }
@@ -130,6 +144,10 @@ class Oven {
                 await this._startHeater();
             }
         }
+    }
+
+    _isTemperatureWithinWorkingLimits() {
+        return this._temperature >= this._MIN_COOKING_TEMPERATURE && this._temperature <= this._MAX_COOKING_TEMPERATURE;
     }
 }
 
