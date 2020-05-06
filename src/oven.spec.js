@@ -37,4 +37,26 @@ describe('OvenDevice', () => {
             expect(ConveyorBelt[4]).toEqual(expectetResult);
         });
     });
+
+    describe('_isTemperatureWithinWorkingLimits', () => {
+        const ovenDevice = new Oven();
+
+        test('should return False if temperature is 210', () => {
+            ovenDevice._temperature = 210;
+
+            expect(ovenDevice._isTemperatureWithinWorkingLimits()).toBeFalsy();
+        });
+
+        test('should return True if temperature is 220', () => {
+            ovenDevice._temperature = 220;
+
+            expect(ovenDevice._isTemperatureWithinWorkingLimits()).toBeTruthy();
+        });
+
+        test('should return True if temperature is 240', () => {
+            ovenDevice._temperature = 240;
+
+            expect(ovenDevice._isTemperatureWithinWorkingLimits()).toBeTruthy();
+        });
+    });
 });
