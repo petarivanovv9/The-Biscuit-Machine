@@ -4,6 +4,7 @@
     "description": "The Bisctuit Machine",
     "main": "index.js",
     "scripts": {
+        "start": "node index",
         "test": "jest"
     },
     "repository": {

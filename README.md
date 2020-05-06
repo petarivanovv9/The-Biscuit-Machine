@@ -21,7 +21,7 @@ To run the project locally you will need to install Node.js first on your comput
 
 #### Terminal
 
-To start the project inside a terminal of your choice run `node index.js`.
+To start the project inside a terminal of your choice run `npm start`.
 
 
 ## Running the Biscuit Machine
