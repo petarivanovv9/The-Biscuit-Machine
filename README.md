@@ -24,7 +24,7 @@ To run the project locally you will need to install Node.js first on your comput
 To start the project inside a terminal of your choice run `node index.js`.
 
 
-## Running the Biscuit Machne
+## Running the Biscuit Machine
 
 After the project is succesfully set up and started, you should be seeing:
 ```
@@ -40,6 +40,14 @@ Operations:
 - to pause the machine, type: `bm.pause()`;
 - to stop the machine, type: `bm.off()`;
 - to exit the machine panel, type `.exit` or double-press `ctrl + C`.
+
+
+## Running the Biscuit Machine's tests
+
+First, you should install the `jest` testing framework as typing in your terminal `npm install` in the root directory of the project.
+
+To run the tests type the `npm test` command in your terminal.
+
 
 You should be also seeing some `console.log`(s) which are from the machine in order to have some "feedback" from the machine.
 
